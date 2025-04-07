@@ -2,3 +2,8 @@ fastapi
 uvicorn
 google-generativeai
 python-dotenv
+langchain
+chromadb
+pypdf
+langchain-google-genai
+langchain-community
