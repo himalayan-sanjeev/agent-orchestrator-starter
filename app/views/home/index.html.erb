@@ -1,3 +1,14 @@
-<h1>Rails + Python AI Integration 🎉</h1>
+<h1>Ask an AI Agent 🤖</h1>
 
-<p><strong>Message from AI Backend:</strong> <%= @ai_message %></p>
+<%= form_with url: root_path, method: :get, local: true do %>
+  <p>
+    <%= label_tag :query, "Enter your question:" %><br>
+    <%= text_field_tag :query, params[:query] %>
+  </p>
+  <%= submit_tag "Ask" %>
+<% end %>
+
+<% if @response.present? %>
+  <h2>🔎 AI Answer:</h2>
+  <p><%= @response %></p>
+<% end %>

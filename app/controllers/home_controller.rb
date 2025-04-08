@@ -1,8 +1,15 @@
+require 'faraday'
+require 'json'
+
 class HomeController < ApplicationController
   def index
-    response = Faraday.get('http://localhost:8000/api/ai_response')
-    @ai_message = JSON.parse(response.body)['message'] if response.success?
-  rescue StandardError => e
-    @ai_message = "Error: #{e.message}"
+    if params[:query].present?
+      begin
+        response = Faraday.get("http://localhost:8000/api/rag_query", { q: params[:query] })
+        @response = JSON.parse(response.body)["answer"]
+      rescue => e
+        @response = "Error contacting AI backend: #{e.message}"
+      end
+    end
   end
 end
