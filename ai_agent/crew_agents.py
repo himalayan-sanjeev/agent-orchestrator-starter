@@ -2,6 +2,7 @@ from crewai import Agent, Task, Crew
 from langchain.chat_models import ChatLiteLLM
 import os
 from dotenv import load_dotenv
+from rag_tools import search_tool
 
 load_dotenv()
 
@@ -16,7 +17,8 @@ llm = ChatLiteLLM(
 researcher = Agent(
     role="Researcher",
     goal="Extract factual information and key points from provided documents",
-    backstory="An expert at scanning text for relevant content",
+    backstory="An expert at scanning text for relevant content (combining topic and doc search)",
+    tools=[search_tool],
     verbose=True,
     llm=llm
 )
