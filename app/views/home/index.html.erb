@@ -12,3 +12,16 @@
   <h2>🔎 AI Answer:</h2>
   <p><%= @response %></p>
 <% end %>
+
+<h2>🚀 Crew Summary Generator</h2>
+
+<%= form_with url: crew_summary_path, method: :get, local: true do %>
+  <%= label_tag :topic, "Enter a topic for your AI crew:" %><br>
+  <%= text_field_tag :topic, nil, placeholder: "e.g., blockchain, AI in medicine" %>
+  <%= submit_tag "Run Crew" %>
+<% end %>
+
+<% if @crew_summary.present? %>
+  <h3>🧠 Crew Output</h3>
+  <pre style="background: #f5f5f5; padding: 1rem; border-radius: 10px;"><%= JSON.pretty_generate(@crew_summary) %></pre>
+<% end %>

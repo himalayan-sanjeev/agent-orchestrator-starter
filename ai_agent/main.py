@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from langchain.vectorstores import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain.chains import RetrievalQA
+from crew_agents import run_crew_for
 
 load_dotenv()
 
@@ -38,3 +39,9 @@ qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
 async def rag_query(q: str):
     response = qa_chain.run(q)
     return {"query": q, "answer": response.strip()}
+
+
+@app.get("/api/crew_summary")
+async def crew_summary(topic: str):
+    final_output = run_crew_for(topic)
+    return {"topic": topic, "summary": final_output}
