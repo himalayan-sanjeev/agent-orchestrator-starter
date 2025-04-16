@@ -7,3 +7,4 @@ chromadb
 pypdf
 langchain-google-genai
 langchain-community
+crewai
